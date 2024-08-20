@@ -7,17 +7,23 @@ using UnityEngine.Events;
 
 public class DialogController : MonoBehaviour
 {
+    // text 정의
     public Text dialogText;
 
+    // Event 종료시 외부 함수 호출
     public UnityEvent onDialogFinished;
     // Start is called before the first frame update
     public void StartDialog()
     {
         dialogText.text = "";
-        string sampleText = "안녕하세요. 플레이어님,\nPocat Rush에 오신 것을 환영합니다\n 룰루라라\n\n\n\n 재호야 뭘봐?";
+        string sampleText = "재호야 일해라\n\n\n룰루라라\n\n\n\n 뭘봐?";
+        // 코루틴 : 원하는 시간만큼 딜레이 적용 가능
+        // yield 와 함께 사용됨
         StartCoroutine(Typing(sampleText));
+
     }
 
+    // 대화 종료 함수
     public void FinishDialog()
     {
         gameObject.SetActive(false);
@@ -35,6 +41,7 @@ public class DialogController : MonoBehaviour
     {
         foreach(char letter in text.ToCharArray())
         {
+            // 한글자씩 추가되며 보여짐
             dialogText.text += letter;
             yield return new WaitForSeconds(0.05f);
         }

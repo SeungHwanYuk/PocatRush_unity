@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class PlayerDetectionTrigger : MonoBehaviour
 {
-    
-   
+    // 플레이어 범위 감지 전용 코드
 
+    // 접촉을 유지한다면 실행 또한 유지 Stay
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
         {
+            // 계속해서 플레이어를 바라본다
             transform.LookAt(other.transform);
-            GameObject TextMesh = GameObject.FindWithTag("TextMesh");
-            TextMesh.GetComponent<MeshRenderer>().enabled = true;
+
+            // TextMesh 보여주기
+            GameObject textMesh = GameObject.FindWithTag("TextMesh");
+            textMesh.GetComponent<MeshRenderer>().enabled = true;
         }
         
     }
 
+    // 플레이어와 떨어졌을 때 실행
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            GameObject TextMesh = GameObject.FindWithTag("TextMesh");
-            TextMesh.GetComponent<MeshRenderer>().enabled = false;
+            // TextMesh 숨기기
+            GameObject textMesh = GameObject.FindWithTag("TextMesh");
+            textMesh.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }

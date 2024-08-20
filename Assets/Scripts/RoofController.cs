@@ -17,8 +17,10 @@ public class RoofController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(isHiddenWhenOn)
         {
+            // SetActive로 만들면 콜라이더도 함께 영향을 받으므로 재감지 불가능!
             gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
         if(!isHiddenWhenOn)

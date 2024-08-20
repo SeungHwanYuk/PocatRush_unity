@@ -52,6 +52,7 @@ public class MyPlayer : MonoBehaviour
 
     public void SetMoveSpeed(float speed)
     {
+        // event 외부 호출 전용
         Debug.Log("setMoveSpeed");
         moveSpeed = speed;
     }

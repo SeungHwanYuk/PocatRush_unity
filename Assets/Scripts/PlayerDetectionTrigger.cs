@@ -11,11 +11,11 @@ public class PlayerDetectionTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            // 계속해서 플레이어를 바라본다
-            transform.LookAt(other.transform);
+            // 플레이어가 들어오면 계속해서 카메라를 바라본다
+            transform.LookAt(Camera.main.transform);
 
             // TextMesh 보여주기
-            GameObject textMesh = GameObject.FindWithTag("TextMesh");
+     GameObject textMesh = transform.Find("Fbutton").gameObject;
             textMesh.GetComponent<MeshRenderer>().enabled = true;
         }
         
@@ -27,7 +27,7 @@ public class PlayerDetectionTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             // TextMesh 숨기기
-            GameObject textMesh = GameObject.FindWithTag("TextMesh");
+     GameObject textMesh = transform.Find("Fbutton").gameObject;
             textMesh.GetComponent<MeshRenderer>().enabled = false;
         }
     }

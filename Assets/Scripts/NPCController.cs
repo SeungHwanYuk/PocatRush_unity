@@ -9,6 +9,8 @@ public class NPCController : MonoBehaviour
     // 콜라이더와 플레이어가 닿았을 시 변수 정의
     public UnityEvent onPlayerEntered;
 
+    public GameObject canvas;
+
     // 키 입력 boolean
     private bool playerInput;
     private bool playerEnter;
@@ -50,7 +52,7 @@ public class NPCController : MonoBehaviour
         
         // 콜라이더에 들어왔다면 외부함수 정의 후 실행 Invoke
         onPlayerEntered.Invoke();
-        GameObject canvas = GameObject.FindWithTag("Canvas");
+       
 
         // 캔버스는 null 일경우 런타임은 유지되지만 예외처리가 발생함
         if (canvas == null)

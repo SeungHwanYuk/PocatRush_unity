@@ -65,7 +65,7 @@ public class TalkFitnessNPC : MonoBehaviour
             if (clickCount == 0)
             {
             exitButton.SetActive(false);
-            dialogue = "여긴 뭐하러 온거야?.\n운동하고 싶으면 들어가서 하던가!";
+            dialogue = "여긴 뭐하러 온거야?\n운동하고 싶으면 들어가서 하던가!";
    
         }
             else if (clickCount == 1)

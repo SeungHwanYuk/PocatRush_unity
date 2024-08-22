@@ -7,6 +7,7 @@ TagManager:
   - NPC
   - Canvas
   - TextMesh
+  - PoleLight
   layers:
   - Default
   - TransparentFX

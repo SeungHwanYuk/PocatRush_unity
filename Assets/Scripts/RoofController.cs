@@ -21,11 +21,11 @@ public class RoofController : MonoBehaviour
         if(isHiddenWhenOn)
         {
             // SetActive로 만들면 콜라이더도 함께 영향을 받으므로 재감지 불가능!
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         }
         if(!isHiddenWhenOn)
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         }
         
         

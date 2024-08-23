@@ -18,7 +18,7 @@ public class TalkMainNPC : MonoBehaviour
     {
         
         dialogText.text = "";
-        dialogue = "재호야 일해라\n\n룰루라라\n\n\n 뭘봐?";
+        dialogue = "내가 만만해? \n\n룰루라라\n\n\n 뭘봐?";
         
         // 코루틴 : 원하는 시간만큼 딜레이 적용 가능
         // yield 와 함께 사용됨

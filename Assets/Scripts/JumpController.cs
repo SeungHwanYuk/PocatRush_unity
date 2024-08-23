@@ -39,7 +39,7 @@ public class JumpController : MonoBehaviour
         
         if (onGround && goJump)
         {
-            print("มกวม!");
+            
             Vector3 jumpPw = new Vector3(0, jumpPower);
             rbody.AddForce(jumpPw, ForceMode.Impulse);
             goJump = false;

@@ -39,7 +39,7 @@ public class RoofController : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             isHiddenWhenOn = true;
-            print("´ê¾Ò´Ù");
+           
         }
     }
 
@@ -48,7 +48,7 @@ public class RoofController : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             isHiddenWhenOn = false;
-            print("¶³¾î ºµû");
+            
         }
     }
 

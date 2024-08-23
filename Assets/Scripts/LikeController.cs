@@ -13,11 +13,16 @@ private static extern void SaveLikeToReactExtern(string npcName, int liked);
     public Text showLiked;
     public Button likeButton;
 
+    public GameObject npc;
     public int liked = 0;
+
+    private string npcName;
 
     // Start is called before the first frame update
     void Start()
     {
+       
+        npcName = npc.name;
         
     }
 
@@ -29,10 +34,11 @@ private static extern void SaveLikeToReactExtern(string npcName, int liked);
 
     public void likeCount()
     {
+        
         liked++;
-        showLiked.text = "¢½ : " + liked; 
+        showLiked.text = "¢½ : " + liked;
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
-    SaveLikeToReactExtern ("MainNPC", liked);
+    SaveLikeToReactExtern (npcName, liked);
 #endif
     }
 }

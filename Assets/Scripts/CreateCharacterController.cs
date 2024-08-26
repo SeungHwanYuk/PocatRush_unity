@@ -12,26 +12,52 @@ public class CreateCharacterController : MonoBehaviour
 
     public Text inputNickname;
     public GameObject startButton;
-    private bool isShow;
+    public GameObject isBlankText;
+    private bool startShow;
+    private bool isBlankShow;
 
     // Start is called before the first frame update
     void Start()
     {
+        isBlankText.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        startButton.SetActive(isShow);
+        startButton.SetActive(startShow);
+        isBlankText.SetActive(isBlankShow);
+
+        if(inputNickname.text == "")
+        {
+            isBlankShow = true;
+        } else
+        {
+            isBlankShow = false;
+        }
+
+
         
+        if (isBlankShow)
+        {
+        isBlankText.SetActive(isBlankShow);
+            Invoke("isBlankHide", 2.0f);
+        }
     }
 
     public void Show()
     {
-        
-        isShow = true;
+        startShow = true;
+    }
 
-     
+    public void isBlank()
+    {
+
+        isBlankShow = true;
+    }
+    public void isBlankHide()
+    {
+        isBlankShow = false;
     }
 
     public void Create()
@@ -40,6 +66,6 @@ public class CreateCharacterController : MonoBehaviour
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CreateCharacterExtern(inputNickname.text);
 #endif
-        Show();
+        
     }
 }

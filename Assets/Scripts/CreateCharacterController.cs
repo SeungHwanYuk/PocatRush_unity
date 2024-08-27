@@ -13,6 +13,9 @@ public class CreateCharacterController : MonoBehaviour
     public Text inputNickname;
     public GameObject startButton;
     public GameObject isBlankText;
+
+    public Text nickNameOverlap;
+
     private bool startShow;
     private bool isBlankShow;
 
@@ -27,7 +30,6 @@ public class CreateCharacterController : MonoBehaviour
     {
         startButton.SetActive(startShow);
         isBlankText.SetActive(isBlankShow);
-
         if(inputNickname.text == "")
         {
             isBlankShow = true;
@@ -35,15 +37,16 @@ public class CreateCharacterController : MonoBehaviour
         {
             isBlankShow = false;
         }
-
-
-        
-        if (isBlankShow)
-        {
-        isBlankText.SetActive(isBlankShow);
-            Invoke("isBlankHide", 2.0f);
-        }
+  
     }
+
+    public void nickNameFound()
+    {
+        nickNameOverlap.text = "중복된 닉네임입니다.";
+        Invoke("nickNameFoundHide", 2.0f);
+    }
+
+   
 
     public void Show()
     {
@@ -55,9 +58,9 @@ public class CreateCharacterController : MonoBehaviour
 
         isBlankShow = true;
     }
-    public void isBlankHide()
+    public void nickNameFoundHide()
     {
-        isBlankShow = false;
+        nickNameOverlap.text = "";
     }
 
     public void Create()

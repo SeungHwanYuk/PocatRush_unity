@@ -20,8 +20,19 @@ public class TalkFitnessNPC : MonoBehaviour
     // Event 종료시 외부 함수 호출
     public UnityEvent onDialogFinished;
     // Start is called before the first frame update
+
+    // 애니메이션 호출
+    public GameObject npc;
+    Animator animator;
+
+    public string stayAnime = "NPCStay";
+    public string hiAnime = "NPCHi";
+    public string byeAnime = "NPCBye";
+
+
     public void StartDialog()
     {
+        animator = npc.GetComponent<Animator>();
         // 첫 대사
         dialogue = "뭘봐?";
         
@@ -29,17 +40,25 @@ public class TalkFitnessNPC : MonoBehaviour
         // yield 와 함께 사용됨
         StartCoroutine(Typing(dialogue));
 
+        animator.Play(hiAnime);
+
     }
 
     // 대화 종료 함수
     public void FinishDialog()
     {
+        
+        animator.Play(byeAnime);
         clickCount = 0;
         dialogText.text = "";
         talkPanel.SetActive(false);
         StopAllCoroutines();
 
         onDialogFinished.Invoke();
+    }
+
+    public void playbyeAnime()
+    {
     }
   
     IEnumerator Typing(string text)

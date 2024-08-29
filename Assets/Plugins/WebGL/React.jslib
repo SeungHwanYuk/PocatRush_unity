@@ -10,5 +10,9 @@ mergeInto(LibraryManager.library, {
   },
   WorldReadyExtern:function () {
     window.dispatchReactUnityEvent("WorldReady");
+  },
+  CharExpUpdateExtern: function (exp) {
+    window.dispatchReactUnityEvent("ExpUpdate", exp);
   }
+  // 쉼표 빼먹지 말것!
 });

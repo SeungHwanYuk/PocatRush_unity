@@ -74,4 +74,10 @@ public class GymController : MonoBehaviour
         print("진행시켜!!");
         panel.SetActive(true);
     }
+
+    public void trainingEnd()
+    {
+        print("운동 끝! 패널 닫는다");
+        panel.SetActive(false);
+    }
 }

@@ -13,6 +13,8 @@ public class DeviceController : MonoBehaviour
     public int inputKg;
     public int inputMin;
 
+
+    // 테스트 전용
     public int km;
     public int kg;
     public int min;
@@ -35,8 +37,25 @@ public class DeviceController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        kmText.text = "달리기 : " + inputKm.ToString() +" km";
-        kgText.text = "무게 : " + inputKg.ToString() +" kg";
-        minText.text = "시간 : " + inputMin.ToString() +" min";
+        kmText.text =  inputKm.ToString();
+        kgText.text = inputKg.ToString();
+        minText.text = inputMin.ToString();
+    }
+    public void kmUpdate(int km)
+    {
+        inputKm = km;
+    }
+    public void kgUpdate(int kg)
+    {
+        inputKg = kg;
+    }
+    public void minUpdate(int min)
+    {
+        inputMin = min;
+    }
+
+    public int getKg()
+    {
+        return inputKg;
     }
 }

@@ -50,7 +50,7 @@ public class CreateCharacterController : MonoBehaviour
     public void nickNameFound()
     {
         nickNameOverlap.text = "중복된 닉네임입니다.";
-        Invoke("nickNameFoundHide", 2.0f);
+        Invoke("nickNameFoundHide", 4.0f);
     }
 
    

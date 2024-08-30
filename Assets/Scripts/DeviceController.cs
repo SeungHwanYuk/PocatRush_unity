@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 public class DeviceController : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void kmResetExtern(int km);
+    [DllImport("__Internal")]
+    private static extern void kgResetExtern(int kg);
+    [DllImport("__Internal")]
+    private static extern void minResetExtern(int min);
+
+
     public Text kmText;
     public Text kgText;
     public Text minText;
@@ -24,9 +33,10 @@ public class DeviceController : MonoBehaviour
     void Start()
     {
         // 디바이스에서 받았다고 가정
-        inputKm = 10;
-        inputKg = 5;
-        inputMin = 60;
+
+        inputKm = 0;
+        inputKg = 0;
+        inputMin = 0;
     }
 
     // Update is called once per frame
@@ -44,18 +54,31 @@ public class DeviceController : MonoBehaviour
     public void kmUpdate(int km)
     {
         inputKm = km;
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        kmResetExtern(km);
+#endif
+
     }
     public void kgUpdate(int kg)
     {
         inputKg = kg;
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        kgResetExtern(kg);
+#endif
     }
     public void minUpdate(int min)
     {
         inputMin = min;
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        minResetExtern(min);
+#endif
     }
 
     public int getKg()
     {
+        // ??
         return inputKg;
     }
+
+    
 }

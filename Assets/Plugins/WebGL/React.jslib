@@ -13,6 +13,15 @@ mergeInto(LibraryManager.library, {
   },
   CharExpUpdateExtern: function (exp) {
     window.dispatchReactUnityEvent("ExpUpdate", exp);
+  },
+  kmResetExtern: function (km) {
+    window.dispatchReactUnityEvent("kmReset", km);
+  },
+  kgResetExtern: function (kg) {
+    window.dispatchReactUnityEvent("kgReset", kg);
+  },
+  minResetExtern: function (min) {
+    window.dispatchReactUnityEvent("minReset", min);
   }
   // 쉼표 빼먹지 말것!
 });

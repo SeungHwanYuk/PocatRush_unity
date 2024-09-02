@@ -16,6 +16,7 @@ public class RunningController : MonoBehaviour
     public Text getKmTextFromManager;
 
     public GameObject gameManager;
+    public GameObject gymController;
     public UnityEvent onTrainingFinished;
 
 
@@ -44,6 +45,7 @@ public class RunningController : MonoBehaviour
             return;
         }
         print("·¯´× À¸›X!");
+        gymController.GetComponent<GymController>().exp = exp;
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
         gameManager.GetComponent<DeviceController>().kmUpdate(0);

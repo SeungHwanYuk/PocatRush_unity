@@ -39,6 +39,7 @@ public class DeviceController : MonoBehaviour
         inputKm = -1;
         inputKg = -1;
         inputMin = -1;
+        signPanel.SetActive(false);
     }
 
     // Update is called once per frame

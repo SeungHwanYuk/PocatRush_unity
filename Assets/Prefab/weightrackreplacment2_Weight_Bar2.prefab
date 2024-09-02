@@ -239,3 +239,5 @@ MonoBehaviour:
         m_CallState: 2
   pressFButtonPanel: {fileID: 0}
   panel: {fileID: 0}
+  expPanel: {fileID: 0}
+  exp: 

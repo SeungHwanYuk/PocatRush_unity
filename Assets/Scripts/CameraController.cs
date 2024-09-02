@@ -9,6 +9,9 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float dis = 5f; //카메라와 플레이어사이의 거리
 
+    // 확대 휠 속도
+    public float wheelspeed = 10.0f;
+
     private float mouseX;
     private float mouseY;
     public float rotateSpeed = 5.0f;
@@ -31,6 +34,10 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        dis -= Input.GetAxis("Mouse ScrollWheel") * wheelspeed;
+        if (dis < -0.5f) dis = -0.5f;
+        if (dis > 7.0f) dis = 7.0f;
+       
     }
 
     private void LateUpdate()

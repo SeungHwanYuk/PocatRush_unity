@@ -17,16 +17,27 @@ public class GymController : MonoBehaviour
     // 운동하기 UI
     public GameObject panel;
 
+    // 운동완료 UI
+    public GameObject expPanel;
+    public int exp;
+    
+    
+
     // 키 입력 boolean
     private bool playerInput;
     private bool playerEnter;
 
+    private void Start()
+    {
+         panel.SetActive(false);
+         expPanel.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            print("플레이어 진입");
+            
             playerEnter = true;
 
         }
@@ -36,7 +47,7 @@ public class GymController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            print("플레이어 벗어남");
+           
             playerEnter = false;
 
             // 벗어나면 운동하기 UI 감춤
@@ -71,13 +82,15 @@ public class GymController : MonoBehaviour
 
     public void trainingStart()
     {
-        print("진행시켜!!");
         panel.SetActive(true);
     }
 
     public void trainingEnd()
     {
-        print("운동 끝! 패널 닫는다");
+        
         panel.SetActive(false);
+        expPanel.GetComponentInChildren<Text>().text = exp.ToString() + "의 경험치 획득!";
+        expPanel.SetActive(true);
     }
+   
 }

@@ -16,6 +16,7 @@ public class BenchPressController : MonoBehaviour
     public Text getKgTextFromManager;
 
     public GameObject gameManager;
+    public GameObject gymController;
     public UnityEvent onTrainingFinished;
 
 
@@ -33,7 +34,7 @@ public class BenchPressController : MonoBehaviour
       
         kg = int.Parse(temp);
         exp = kg * 2;
-        resultExpText.text = "[ " + kg.ToString() + " kg]만큼의 " + exp + " 경험치 획득 !";
+        resultExpText.text = "[ " + kg.ToString() + " kg]만큼의 " + exp + " 경험치 획득가능 !";
     }
     
     public void startBenchPress()
@@ -45,6 +46,7 @@ public class BenchPressController : MonoBehaviour
             return;
         }
         print("벤치 프레스 으쌰!");
+        gymController.GetComponent<GymController>().exp = exp;
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
         gameManager.GetComponent<DeviceController>().kgUpdate(0);

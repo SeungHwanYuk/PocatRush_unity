@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969264364563843476}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.024300002, y: 0, z: -0.062200002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -141,3 +141,5 @@ MonoBehaviour:
         m_CallState: 2
   pressFButtonPanel: {fileID: 0}
   panel: {fileID: 0}
+  expPanel: {fileID: 0}
+  exp: 

@@ -29,7 +29,8 @@ public class TimeController : MonoBehaviour
         mainLight.enabled = false;
         poleLights.SetActive(true);
             RenderSettings.skybox = nightSky;
-            RenderSettings.ambientLight = new Color32(39, 49, 79,0);
+            RenderSettings.ambientLight = new Color32(109, 134, 213, 0);
+            
         
 
         } else if (mainLight.enabled == false)
@@ -37,7 +38,7 @@ public class TimeController : MonoBehaviour
             mainLight.enabled = true;
             poleLights.SetActive(false);
             RenderSettings.skybox = daySky;
-            RenderSettings.ambientLight = new Color32(173, 162, 158, 0);
+            RenderSettings.ambientLight = new Color32(255, 255, 255, 0);
         }
     }
 }

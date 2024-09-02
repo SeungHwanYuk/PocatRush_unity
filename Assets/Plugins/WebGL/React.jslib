@@ -22,6 +22,10 @@ mergeInto(LibraryManager.library, {
   },
   minResetExtern: function (min) {
     window.dispatchReactUnityEvent("minReset", min);
+  },
+   HpUpdateExtern: function (newHp) {
+    window.dispatchReactUnityEvent("HpUpdate", newHp);
   }
+  
   // 쉼표 빼먹지 말것!
 });

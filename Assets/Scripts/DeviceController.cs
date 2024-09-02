@@ -22,6 +22,9 @@ public class DeviceController : MonoBehaviour
     public int inputKg;
     public int inputMin;
 
+    // 연동 필요 UI
+    public GameObject devicePanel;
+    public GameObject signPanel;
 
     // 테스트 전용
     public int km;
@@ -33,10 +36,9 @@ public class DeviceController : MonoBehaviour
     void Start()
     {
         // 디바이스에서 받았다고 가정
-
-        inputKm = 0;
-        inputKg = 0;
-        inputMin = 0;
+        inputKm = -1;
+        inputKg = -1;
+        inputMin = -1;
     }
 
     // Update is called once per frame
@@ -74,10 +76,10 @@ public class DeviceController : MonoBehaviour
 #endif
     }
 
-    public int getKg()
+    public void deviceNotCreated()
     {
-        // ??
-        return inputKg;
+        devicePanel.SetActive(false);
+        signPanel.SetActive(true);
     }
 
     

@@ -37,6 +37,12 @@ public class RunningController : MonoBehaviour
 
     public void startRunning()
     {
+        // 운동량 0인 경우 UI추가 요망
+        if (km <= 0)
+        {
+            print("운동을 하시고 오셔야죠");
+            return;
+        }
         print("러닝 으쌰!");
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);

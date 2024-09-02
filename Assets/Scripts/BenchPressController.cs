@@ -38,12 +38,18 @@ public class BenchPressController : MonoBehaviour
     
     public void startBenchPress()
     {
+        // 운동량 0인 경우 UI추가 요망
+        if(kg <= 0)
+        {
+            print("운동을 하시고 오셔야죠");
+            return;
+        }
         print("벤치 프레스 으쌰!");
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
         gameManager.GetComponent<DeviceController>().kgUpdate(0);
-        print("경험치 획득 완료");
         onTrainingFinished.Invoke();
+        print("경험치 획득 완료");
 #endif
     }
 

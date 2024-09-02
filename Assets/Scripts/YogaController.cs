@@ -37,6 +37,12 @@ public class YogaController : MonoBehaviour
 
     public void startYoga()
     {
+        // 운동량 0인 경우 UI추가 요망
+        if (min <= 0)
+        {
+            print("운동을 하시고 오셔야죠");
+            return;
+        }
         print("요가 으쌰!");
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);

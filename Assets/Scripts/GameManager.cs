@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     [DllImport("__Internal")]
     private static extern void WorldReadyExtern();
+    [DllImport("__Internal")]
+    private static extern void HpUpdateExtern(int newHp);
 
 
     // Start is called before the first frame update
@@ -29,11 +31,22 @@ public class GameManager : MonoBehaviour
     }
     public void GetHp(int hp)
     {
-        hpText.text = "HP : " + hp.ToString();
+        hpText.text = hp.ToString();
     }
     public void GetLevel(string level)
     {
         levelText.text = level;  
+    }
+
+    public void HpUpdate()
+    {
+        int nowHp = int.Parse(hpText.text);
+        int newHp = nowHp - 1;
+        hpText.text = newHp.ToString();
+#if UNITY_WEBGL == true && UNITY_EDITOR == false 
+        HpUpdateExtern(newHp);
+#endif
+
     }
 
     // Update is called once per frame

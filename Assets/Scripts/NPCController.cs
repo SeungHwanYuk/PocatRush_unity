@@ -15,6 +15,9 @@ public class NPCController : MonoBehaviour
     private bool playerInput;
     private bool playerEnter;
 
+    // 대화 중 boolean
+    private bool isTalking;
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -35,21 +38,40 @@ public class NPCController : MonoBehaviour
         }
 
     }
+
+    private void Start()
+    {
+        Transform transform = canvas.transform;
+        GameObject panel = transform.Find("Panel").gameObject;
+        if(panel.activeSelf == true)
+        {
+            panel.SetActive(false);
+        }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Transform transform = canvas.transform;
+            GameObject panel = transform.Find("Panel").gameObject;
+            if(panel.activeSelf == true)
+            {
+                return;
+            }
             npcTalk();
+            
         }
     }
 
     private void npcTalk()
     {
+        
         if (!playerInput && !playerEnter)
         {
             return;
         }
         
+       
         // 콜라이더에 들어왔다면 외부함수 정의 후 실행 Invoke
         onPlayerEntered.Invoke();
        

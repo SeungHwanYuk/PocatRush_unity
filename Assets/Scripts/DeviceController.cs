@@ -54,6 +54,8 @@ public class DeviceController : MonoBehaviour
         kgText.text = inputKg.ToString();
         minText.text = inputMin.ToString();
     }
+
+
     public void kmUpdate(int km)
     {
         inputKm = km;
@@ -83,5 +85,19 @@ public class DeviceController : MonoBehaviour
         signPanel.SetActive(true);
     }
 
-    
+    // 운동량 +1 시키기
+    public void deviceKmPlus()
+    {
+        inputKm = inputKm + 1;
+    }
+    public void deviceKgPlus()
+    {
+        inputKg = inputKg + 1;
+    }
+    public void deviceMinPlus()
+    {
+        inputMin = inputMin + 1;
+    }
+
+
 }

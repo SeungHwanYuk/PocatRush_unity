@@ -44,6 +44,8 @@ public class RunningController : MonoBehaviour
             print("운동을 하시고 오셔야죠");
             return;
         }
+
+       
         print("러닝 으쌰!");
         gymController.GetComponent<GymController>().exp = exp;
 #if UNITY_WEBGL == true && UNITY_EDITOR == false

@@ -8,6 +8,9 @@ TagManager:
   - Canvas
   - TextMesh
   - PoleLight
+  - PlayerHp
+  - PlayerLevel
+  - HpZeroPanel
   layers:
   - Default
   - TransparentFX

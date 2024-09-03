@@ -9,8 +9,12 @@ public class TalkFitnessNPC : MonoBehaviour
 
     public GameObject talkPanel;
     public GameObject nextButton;
+    public GameObject goMainButton;
+    public GameObject askButton;
     public GameObject exitButton;
+
     int clickCount = 0;
+    int talkWayCount = 0;
 
 
     // text 정의
@@ -41,6 +45,7 @@ public class TalkFitnessNPC : MonoBehaviour
         StartCoroutine(Typing(dialogue));
 
         animator.Play(hiAnime);
+        askButton.SetActive(false);
 
     }
 
@@ -50,6 +55,7 @@ public class TalkFitnessNPC : MonoBehaviour
         
         animator.Play(byeAnime);
         clickCount = 0;
+        talkWayCount = 0;
         dialogText.text = "";
         talkPanel.SetActive(false);
         StopAllCoroutines();
@@ -73,39 +79,77 @@ public class TalkFitnessNPC : MonoBehaviour
         // 타이핑이 끝나면 실행
         yield return new WaitForSeconds(0.7f);
         nextButton.SetActive(true);
+
+        // 대화 분기점
+        if(clickCount == 2 && talkWayCount == 0)
+        {
+        askButton.SetActive(true);
+            
+        }
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-     
-        
-            if (clickCount == 0)
+            if (clickCount == 0 && talkWayCount == 0)
             {
             exitButton.SetActive(false);
-            dialogue = "여긴 뭐하러 온거야?\n운동하고 싶으면 들어가서 하던가!";
-   
+            dialogue = "처음보는 인간인데...";
         }
-            else if (clickCount == 1)
+            else if (clickCount == 1 && talkWayCount == 0)
             {
-            dialogue = "뭘 꾸물대니?";
+            
+            dialogue = "여긴 뭐하러 온거야?\n운동하고 싶으면 들어가서 하던가!";
             }
-            else if ( clickCount == 2)
+            else if ( clickCount == 2 && talkWayCount == 0)
         {
             nextButton.SetActive(false);
             exitButton.SetActive(true);
         }
 
-       
+        // 분기점 1
+        if (clickCount == 2 && talkWayCount == 1)
+        {
+            exitButton.SetActive(false);
+            dialogue = "인간세계에서 운동을하면\n포켓월드의 경험치가 올라간다던데...?";
+        } else if(clickCount == 3 && talkWayCount == 1)
+        {
+            dialogue = "헬스장안에있는 운동기구와 상호작용하면\n너의 레벨이 오를거야!";
+        }
+        else if (clickCount == 4 && talkWayCount == 1)
+        {
+            dialogue = "빨리 안가고 뭐해?";
+        }
+        else if (clickCount == 5 && talkWayCount == 1)
+        {
+            nextButton.SetActive(false);
+            exitButton.SetActive(true);
+        }
+
+    }
+
+    public void askCountPlus()
+    {
+        // 분기점 시작시 첫 문장 지정
+        
+        
+            dialogue = "그건 스마트워치잖아?";
+        
+        nextButton.SetActive(false);
+        talkWayCount++;
+        print(talkWayCount+ " : talkWayCount");
+        dialogText.text = "";
+        StartCoroutine(Typing(dialogue));
     }
     public void countPlus()
     {
         nextButton.SetActive(false);
         clickCount++;
+        print(clickCount + " : clickCount");
         dialogText.text = "";
-        StartCoroutine(Typing(dialogue));
-        
+        StartCoroutine(Typing(dialogue));  
     }
 
     

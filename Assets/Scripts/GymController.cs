@@ -16,12 +16,16 @@ public class GymController : MonoBehaviour
 
     // 운동하기 UI
     public GameObject panel;
+    public GameObject hpZeroPanel;
 
     // 운동완료 UI
     public GameObject expPanel;
     public int exp;
-    
-    
+
+    public GameObject playerHp;
+    private string playerHpText;
+
+
 
     // 키 입력 boolean
     private bool playerInput;
@@ -29,8 +33,11 @@ public class GymController : MonoBehaviour
 
     private void Start()
     {
-         panel.SetActive(false);
-         expPanel.SetActive(false);
+       
+        playerHp = GameObject.FindGameObjectWithTag("PlayerHp");
+        panel.SetActive(false);
+        expPanel.SetActive(false);
+        hpZeroPanel.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,9 +64,18 @@ public class GymController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        playerHpText = playerHp.GetComponent<Text>().text;
+        if (Input.GetKeyDown(KeyCode.F) && playerEnter)
         {
+            if(int.Parse(playerHpText) <= 0)
+            {
+                hpZeroPanel.SetActive(true);
+                return;
+            } else
+            {
+
             askTraining();
+            }
         }
     }
 
@@ -76,7 +92,6 @@ public class GymController : MonoBehaviour
         {
             return;
         }
-
         
     }
 

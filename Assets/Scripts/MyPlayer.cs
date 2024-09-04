@@ -25,6 +25,8 @@ public class MyPlayer : MonoBehaviour
     public string talkingAnime = "PlayerTalking";
     public string jumpAnime = "PlayerJump";
     public string runAnime = "PlayerRun";
+    public string sittingAnime = "PlayerSitting";
+    public string standUpAnime = "PlayerStandUp";
 
     string nowAnime = "";
     string oldAnime = "";
@@ -106,7 +108,7 @@ public class MyPlayer : MonoBehaviour
     public void SetMoveSpeed(float speed)
     {
         // event 외부 호출 전용
-        Debug.Log("setMoveSpeed");
+        
         moveSpeed = speed;
     }
 
@@ -114,5 +116,13 @@ public class MyPlayer : MonoBehaviour
     {
         animator.Play(talkingAnime);
     }
-   
+    public void playSittingAnime()
+    {   
+        animator.Play(sittingAnime);
+    }
+    public void playStandUpAnime()
+    {
+        animator.Play(standUpAnime);
+    }
+
 }

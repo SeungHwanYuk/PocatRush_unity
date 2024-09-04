@@ -17,9 +17,26 @@ public class MyPlayer : MonoBehaviour
 
     private Transform cameraTransform;
 
+    // 애니메이션 호출
+    public GameObject player;
+    Animator animator;
+
+    public string standingAnime = "PlayerStandingIdle";
+    public string talkingAnime = "PlayerTalking";
+    public string jumpAnime = "PlayerJump";
+    public string runAnime = "PlayerRun";
+
+    string nowAnime = "";
+    string oldAnime = "";
+
+    // 착지 판정
+    bool onGround = false;
+    public LayerMask groundLayer;
+
     private void Start()
     {
         cameraTransform = Camera.main.transform;
+        animator = player.GetComponent<Animator>();
     }
 
 
@@ -34,10 +51,12 @@ public class MyPlayer : MonoBehaviour
         //벡터 정규화. 만약 input=new Vector2(1,1) 이면 오른쪽위 대각선으로 움직인다.
         //방향을 찾아준다
 
+
         if (inputDir != Vector2.zero)//움직임을 멈췄을 때 다시 처음 각도로 돌아가는걸 막기위함
         {
             float rotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg+cameraTransform.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, rotation, ref rotationVelocity, smoothRotationTime);
+            
         }
         //각도를 구해주는 코드, 플레이어가 오른쪽 위 대각선으로 움직일시 그 방향을 바라보게 해준다
         //Mathf.Atan2는 라디안을 return하기에 다시 각도로 바꿔주는 Mathf.Rad2Deg를 곱해준다
@@ -45,9 +64,43 @@ public class MyPlayer : MonoBehaviour
         //SmoothDampAngle을 이용해서 부드럽게 플레이어의 각도를 바꿔준다.
 
         targetSpeed = moveSpeed * inputDir.magnitude;
+
+        
+ 
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, smoothMoveTime);
         //현재스피드에서 타겟스피드까지 smoothMoveTime 동안 변한다
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+        onGround = Physics.Linecast(transform.position,
+                                       transform.position - (transform.up * 0.7f),
+                                       groundLayer);
+        if (onGround)
+        {
+            if (currentSpeed < 1f)
+            {
+                nowAnime = standingAnime;
+            } else
+            {
+                nowAnime = runAnime;
+            }
+        }
+        else
+        {
+            nowAnime = jumpAnime;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+
+            if (nowAnime != oldAnime)
+            {
+
+                oldAnime = nowAnime;
+                animator.Play(nowAnime);  // 애니메이션 재생
+                                          // 매 프레임마다 시작 이미지부터 보여주면 안되므로
+                                          // 애니메이션이 같지 않을때만 실행됨
+            }
+        
     }
 
     public void SetMoveSpeed(float speed)
@@ -56,4 +109,10 @@ public class MyPlayer : MonoBehaviour
         Debug.Log("setMoveSpeed");
         moveSpeed = speed;
     }
+
+    public void playTalkingAnime()
+    {
+        animator.Play(talkingAnime);
+    }
+   
 }

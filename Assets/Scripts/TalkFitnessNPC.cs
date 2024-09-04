@@ -27,6 +27,7 @@ public class TalkFitnessNPC : MonoBehaviour
 
     // 애니메이션 호출
     public GameObject npc;
+    public GameObject player;
     Animator animator;
 
     public string stayAnime = "NPCStay";
@@ -84,6 +85,7 @@ public class TalkFitnessNPC : MonoBehaviour
         if(clickCount == 2 && talkWayCount == 0)
         {
         askButton.SetActive(true);
+            exitButton.SetActive(true);
             
         }
 
@@ -106,7 +108,6 @@ public class TalkFitnessNPC : MonoBehaviour
             else if ( clickCount == 2 && talkWayCount == 0)
         {
             nextButton.SetActive(false);
-            exitButton.SetActive(true);
         }
 
         // 분기점 1
@@ -133,15 +134,17 @@ public class TalkFitnessNPC : MonoBehaviour
     public void askCountPlus()
     {
         // 분기점 시작시 첫 문장 지정
-        
-        
-            dialogue = "그건 스마트워치잖아?";
-        
+        dialogue = "그건 스마트워치잖아?";
+
         nextButton.SetActive(false);
         talkWayCount++;
         print(talkWayCount+ " : talkWayCount");
         dialogText.text = "";
         StartCoroutine(Typing(dialogue));
+
+        // 플레이어 대화 애니메이션 실행
+        player.GetComponent<MyPlayer>().playTalkingAnime();
+        
     }
     public void countPlus()
     {

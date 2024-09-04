@@ -38,7 +38,7 @@ public class TalkCafeNPC : MonoBehaviour
     {
         animator = npc.GetComponent<Animator>();
         // 첫 대사
-        dialogue = "뭘봐?";
+        dialogue = "으앙ㅠㅠ";
         
         // 코루틴 : 원하는 시간만큼 딜레이 적용 가능
         // yield 와 함께 사용됨
@@ -51,9 +51,7 @@ public class TalkCafeNPC : MonoBehaviour
 
     // 대화 종료 함수
     public void FinishDialog()
-    {
-        
-        
+    {  
         clickCount = 0;
         talkWayCount = 0;
         dialogText.text = "";
@@ -81,11 +79,11 @@ public class TalkCafeNPC : MonoBehaviour
         nextButton.SetActive(true);
 
         // 대화 분기점
-        if(clickCount == 2 && talkWayCount == 0)
+        /*if(clickCount == 2 && talkWayCount == 0)
         {
         askButton.SetActive(true);
             
-        }
+        }*/
 
     }
 
@@ -96,12 +94,12 @@ public class TalkCafeNPC : MonoBehaviour
             if (clickCount == 0 && talkWayCount == 0)
             {
             exitButton.SetActive(false);
-            dialogue = "처음보는 인간인데...";
+            dialogue = "손이 짧아서 컵이 닦이지 않아ㅠ";
         }
             else if (clickCount == 1 && talkWayCount == 0)
             {
             
-            dialogue = "여긴 뭐하러 온거야?\n운동하고 싶으면 들어가서 하던가!";
+            dialogue = "어쩌지....";
             }
             else if ( clickCount == 2 && talkWayCount == 0)
         {
@@ -109,7 +107,7 @@ public class TalkCafeNPC : MonoBehaviour
             exitButton.SetActive(true);
         }
 
-        // 분기점 1
+       /* // 분기점 1
         if (clickCount == 2 && talkWayCount == 1)
         {
             exitButton.SetActive(false);
@@ -126,7 +124,7 @@ public class TalkCafeNPC : MonoBehaviour
         {
             nextButton.SetActive(false);
             exitButton.SetActive(true);
-        }
+        }*/
 
     }
 
@@ -135,8 +133,7 @@ public class TalkCafeNPC : MonoBehaviour
         // 분기점 시작시 첫 문장 지정
         
         
-            dialogue = "그건 스마트워치잖아?";
-        
+        dialogue = "그건 스마트워치잖아?";
         nextButton.SetActive(false);
         talkWayCount++;
         print(talkWayCount+ " : talkWayCount");

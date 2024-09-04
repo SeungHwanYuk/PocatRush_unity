@@ -13,6 +13,8 @@ public class JumpController : MonoBehaviour
 
     bool goJump = false;
     bool onGround = false;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,8 @@ public class JumpController : MonoBehaviour
             
             Vector3 jumpPw = new Vector3(0, jumpPower);
             rbody.AddForce(jumpPw, ForceMode.Impulse);
+           
+
             goJump = false;
         }
     }

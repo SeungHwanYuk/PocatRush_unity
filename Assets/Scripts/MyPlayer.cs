@@ -19,14 +19,22 @@ public class MyPlayer : MonoBehaviour
 
     // 애니메이션 호출
     public GameObject player;
+    public GameObject userPanel;  // 체력 확인용
     Animator animator;
 
-    public string standingAnime = "PlayerStandingIdle";
-    public string talkingAnime = "PlayerTalking";
-    public string jumpAnime = "PlayerJump";
-    public string runAnime = "PlayerRun";
-    public string sittingAnime = "PlayerSitting";
-    public string standUpAnime = "PlayerStandUp";
+    private string standingAnime1 = "PlayerStandingIdle";
+    private string standingAnime2 = "PlayerStanding1";
+    private string standingAnime3 = "PlayerStanding2";
+    private string talkingAnime = "PlayerTalking";
+    private string jumpAnime = "PlayerJump";
+    private string runAnime = "PlayerRun";
+    private string sittingAnime = "PlayerSitting";
+    private string standUpAnime = "PlayerStandUp";
+    private string fastRunAnime = "PlayerFastRun";
+    private string bicicleAnime = "PlayerBicicle";
+    private string yogaAnime1 = "PlayerYoga1";
+    private string yogaAnime2 = "PlayerYoga2";
+    private string drunkAnime = "PlayerDrunk";
 
     string nowAnime = "";
     string oldAnime = "";
@@ -79,10 +87,20 @@ public class MyPlayer : MonoBehaviour
         {
             if (currentSpeed < 1f)
             {
-                nowAnime = standingAnime;
+                
+                nowAnime = standingAnime1;
+               
             } else
             {
+                if(int.Parse(userPanel.GetComponent<GameManager>().hpText.text) <= 3)
+                {
+                    moveSpeed = 2f;
+                    nowAnime = drunkAnime;
+                } else
+                {
+
                 nowAnime = runAnime;
+                }
             }
         }
         else
@@ -119,10 +137,40 @@ public class MyPlayer : MonoBehaviour
     public void playSittingAnime()
     {   
         animator.Play(sittingAnime);
+        moveSpeed = 0;
     }
+
     public void playStandUpAnime()
     {
         animator.Play(standUpAnime);
+        Invoke("standUpDelayTime", 2.0f);
+    }
+
+    public void standUpDelayTime()
+    {
+        moveSpeed = 4;
+    }
+
+    public void playFastRunAnime()
+    {
+        animator.Play(fastRunAnime);
+    }
+    public void playBicicleAnime()
+    {
+        animator.Play(bicicleAnime);
+    }
+    public void playYogaAnime()
+    {
+        int random = Random.Range(0,2);
+        print(random);
+        if(random == 1)
+        {
+        animator.Play(yogaAnime1);
+
+        } else
+        {
+        animator.Play(yogaAnime2);
+        }
     }
 
 }

@@ -36,6 +36,11 @@ public class YogaController : MonoBehaviour
         resultExpText.text = "[ " + min.ToString() + " min]만큼의 " + exp + " 경험치 획득 !";
     }
 
+    public void isObject(GameObject obj)
+    {
+        gymController = obj;
+    }
+
     public void startYoga()
     {
         // 운동량 0인 경우 UI추가 요망
@@ -45,6 +50,9 @@ public class YogaController : MonoBehaviour
             return;
         }
         print("요가 으쌰!");
+
+        
+        gymController.GetComponent<GymController>().yogaAnimeStart();
         gymController.GetComponent<GymController>().exp = exp;
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);

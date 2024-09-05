@@ -6,6 +6,8 @@ public class RoofController : MonoBehaviour
 {
     [SerializeField]
     private bool isHiddenWhenOn;
+
+    public GameObject lights;
    
 
     // Start is called before the first frame update
@@ -22,14 +24,24 @@ public class RoofController : MonoBehaviour
         {
             // SetActive로 만들면 콜라이더도 함께 영향을 받으므로 재감지 불가능!
             gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+            if(lights)
+            {
+
+            lights.SetActive(true);
+            }
         }
         if(!isHiddenWhenOn)
         {
             gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+            if(lights)
+            {
+
+            lights.SetActive(false);
+            }
         }
-        
-        
-        
+
+
+
     }
 
 

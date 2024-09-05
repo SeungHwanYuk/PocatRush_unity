@@ -19,10 +19,13 @@ public class RunningController : MonoBehaviour
     public GameObject gymController;
     public UnityEvent onTrainingFinished;
 
+    
+
 
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -35,6 +38,10 @@ public class RunningController : MonoBehaviour
         exp = km * 3;
         resultExpText.text = "[ " + km.ToString() + " km]¸¸Å­ÀÇ " + exp + " °æÇèÄ¡ È¹µæ !";
     }
+    public void isObject(GameObject obj)
+    {
+        gymController = obj;
+    }
 
     public void startRunning()
     {
@@ -45,8 +52,16 @@ public class RunningController : MonoBehaviour
             return;
         }
 
-       
+        
         print("·¯´× À¸›X!");
+        if (gymController.tag == "TreadMill")
+        {
+            gymController.GetComponent<GymController>().fastRunAnimeStart();
+        }
+        else if (gymController.tag == "Bicicle")
+        {
+            gymController.GetComponent<GymController>().bicicleAnimeStart();
+        }
         gymController.GetComponent<GymController>().exp = exp;
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);

@@ -10,10 +10,13 @@ public class SittingController : MonoBehaviour
     private bool playerEnter;
 
     public GameObject player;
-   
+    public GameObject thisObject;
+
 
     // 상호작용시 플레이어가 이동할 자리
     private Vector3 sitPosition;
+
+    private bool sitIsActive;
 
 
     // Start is called before the first frame update
@@ -21,7 +24,7 @@ public class SittingController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         
-        sitPosition = new Vector3(this.transform.position.x + 0.53f, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z);
+        sitPosition = new Vector3(gameObject.transform.position.x + 0.53f, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z);
         
     }
 
@@ -33,6 +36,21 @@ public class SittingController : MonoBehaviour
             sit();
         }
     }
+    private void FixedUpdate()
+    {
+        if(sitIsActive == true)
+        {
+        player.transform.SetPositionAndRotation(
+            Vector3.Lerp(player.transform.position, sitPosition, Time.deltaTime),
+            Quaternion.Lerp(player.transform.rotation, gameObject.transform.rotation,Time.deltaTime *2));
+
+            if (Input.anyKeyDown && !Input.GetMouseButtonDown(1))
+            {
+                player.GetComponent<MyPlayer>().playStandUpAnime();
+                sitIsActive = false;
+            }
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -40,6 +58,7 @@ public class SittingController : MonoBehaviour
           
            
             playerEnter = true;
+            
 
         }
     }
@@ -48,17 +67,22 @@ public class SittingController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            playerEnter = false;
             gameObject.GetComponent<BoxCollider>().enabled = true;
+            playerEnter = false;
         }
 
+    }
+
+    public void isObject(GameObject obj)
+    {
+        thisObject = obj;
     }
 
     public void sit()
     {
         print(" 앉아! ");
         gameObject.GetComponent<BoxCollider>().enabled = false;
-        player.GetComponent<Transform>().transform.SetPositionAndRotation(sitPosition, gameObject.transform.rotation);
+        sitIsActive = true;
         player.GetComponent<MyPlayer>().Invoke("playSittingAnime", 0.5f);
     }
 }

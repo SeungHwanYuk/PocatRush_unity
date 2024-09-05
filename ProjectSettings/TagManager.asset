@@ -11,6 +11,9 @@ TagManager:
   - PlayerHp
   - PlayerLevel
   - HpZeroPanel
+  - TreadMill
+  - Bicicle
+  - YogaMat
   layers:
   - Default
   - TransparentFX

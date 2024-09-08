@@ -36,7 +36,12 @@ public class BenchPressController : MonoBehaviour
         exp = kg * 2;
         resultExpText.text = "[ " + kg.ToString() + " kg]만큼의 " + exp + " 경험치 획득가능 !";
     }
-    
+
+    public void isObject(GameObject obj)
+    {
+        gymController = obj;
+    }
+
     public void startBenchPress()
     {
         // 운동량 0인 경우 UI추가 요망
@@ -45,13 +50,14 @@ public class BenchPressController : MonoBehaviour
             print("운동을 하시고 오셔야죠");
             return;
         }
-        print("벤치 프레스 으쌰!");
+        print("벤치 프레스 으쌰! , " + "경험치 : " + exp);
         gymController.GetComponent<GymController>().exp = exp;
+        gymController.GetComponent<GymController>().trainingEnd();
+        gameManager.GetComponent<DeviceController>().kgUpdate(0);
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
-        gameManager.GetComponent<DeviceController>().kgUpdate(0);
-        onTrainingFinished.Invoke();
         print("경험치 획득 완료");
+        onTrainingFinished.Invoke();
 #endif
     }
 

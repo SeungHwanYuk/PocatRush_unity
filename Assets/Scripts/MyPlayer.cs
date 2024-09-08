@@ -22,9 +22,10 @@ public class MyPlayer : MonoBehaviour
     public GameObject userPanel;  // 체력 확인용
     Animator animator;
 
-    private string standingAnime1 = "PlayerStandingIdle";
-    private string standingAnime2 = "PlayerStanding1";
-    private string standingAnime3 = "PlayerStanding2";
+    private string standingAnimeCase1 = "PlayerStandingIdle";
+    private string standingAnimeCase2 = "PlayerStanding1";
+    private string standingAnimeCase3 = "PlayerStanding2";
+    private string standingAnime;
     private string talkingAnime = "PlayerTalking";
     private string jumpAnime = "PlayerJump";
     private string runAnime = "PlayerRun";
@@ -36,8 +37,12 @@ public class MyPlayer : MonoBehaviour
     private string yogaAnime2 = "PlayerYoga2";
     private string drunkAnime = "PlayerDrunk";
 
+    private float idleChangeTime = 0.0f;
+    private bool playerBusy = false; 
+
     string nowAnime = "";
     string oldAnime = "";
+
 
     // 착지 판정
     bool onGround = false;
@@ -74,22 +79,38 @@ public class MyPlayer : MonoBehaviour
         //SmoothDampAngle을 이용해서 부드럽게 플레이어의 각도를 바꿔준다.
 
         targetSpeed = moveSpeed * inputDir.magnitude;
-
-        
- 
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, smoothMoveTime);
         //현재스피드에서 타겟스피드까지 smoothMoveTime 동안 변한다
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+
+        // 착지 판정
         onGround = Physics.Linecast(transform.position,
                                        transform.position - (transform.up * 0.7f),
                                        groundLayer);
+      
         if (onGround)
         {
             if (currentSpeed < 1f)
             {
                 
-                nowAnime = standingAnime1;
-               
+                if(idleChangeTime >= 7.0f && idleChangeTime >= 0.0f && playerBusy == false)
+                {
+                    standingAnime = standingAnimeCase1;
+                    int random = Random.Range(0,2);
+                    if(random == 0)
+                    {
+
+                        standingAnime = standingAnimeCase2;
+                        idleChangeTime = -12.0f;
+                    } else if(random == 1)
+                    {
+
+                        standingAnime = standingAnimeCase3;
+                        idleChangeTime = -12.0f;
+                    }
+
+                }
+                nowAnime = standingAnime;          
             } else
             {
                 if(int.Parse(userPanel.GetComponent<GameManager>().hpText.text) <= 3)
@@ -107,13 +128,29 @@ public class MyPlayer : MonoBehaviour
         {
             nowAnime = jumpAnime;
         }
+
+        // 가만히 있는 시간 계산
+        if (nowAnime == standingAnime)
+        {
+            idleChangeTime = idleChangeTime + Time.deltaTime; 
+        if (Input.GetMouseButtonDown(0))
+        {
+                playerBusy = true;
+        }
+        }
     }
 
     private void FixedUpdate()
     {
-
+        if(currentSpeed > 0.1f)
+        {
+            idleChangeTime = 0.0f;
+            standingAnime = "PlayerStandingIdle";
+            playerBusy = false;
+        }
             if (nowAnime != oldAnime)
             {
+            
 
                 oldAnime = nowAnime;
                 animator.Play(nowAnime);  // 애니메이션 재생
@@ -133,17 +170,20 @@ public class MyPlayer : MonoBehaviour
     public void playTalkingAnime()
     {
         animator.Play(talkingAnime);
+        playerBusy = true;
     }
     public void playSittingAnime()
     {   
         animator.Play(sittingAnime);
         moveSpeed = 0;
+        playerBusy = true;
     }
 
     public void playStandUpAnime()
     {
         animator.Play(standUpAnime);
         Invoke("standUpDelayTime", 2.0f);
+        playerBusy = true;
     }
 
     public void standUpDelayTime()
@@ -153,14 +193,25 @@ public class MyPlayer : MonoBehaviour
 
     public void playFastRunAnime()
     {
+        playerBusy = true;
         animator.Play(fastRunAnime);
     }
     public void playBicicleAnime()
     {
+        playerBusy = true;
         animator.Play(bicicleAnime);
+       
     }
+
+    public void playJumpAnime()
+    {
+        animator.Play(jumpAnime);
+    }
+
+    
     public void playYogaAnime()
     {
+        playerBusy = true;
         int random = Random.Range(0,2);
         print(random);
         if(random == 1)

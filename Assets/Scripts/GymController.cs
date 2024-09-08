@@ -20,6 +20,8 @@ public class GymController : MonoBehaviour
 
     // ¿îµ¿¿Ï·á UI
     public GameObject expPanel;
+    public Text expText;
+
     public int exp;
     public GameObject playerHp;
     private string playerHpText;
@@ -103,8 +105,8 @@ public class GymController : MonoBehaviour
                     else if(gameObject.tag == "YogaMat")
                     {
                     yogaMat = gameObject;
-                    yogaAnimePoint =  new Vector3(yogaMat.transform.position.x +0.7f, yogaMat.transform.position.y + 0.5f, yogaMat.transform.position.z+0.5f);
-                    yogaAnimeRotation = new Quaternion(yogaMat.transform.rotation.x, yogaMat.transform.rotation.y + 1, yogaMat.transform.rotation.z, yogaMat.transform.rotation.w);
+                    yogaAnimePoint =  new Vector3(yogaMat.transform.position.x +0.9f, yogaMat.transform.position.y + 0.5f, yogaMat.transform.position.z+0.5f);
+                    yogaAnimeRotation = new Quaternion(yogaMat.transform.rotation.x, yogaMat.transform.rotation.y + -1, yogaMat.transform.rotation.z, yogaMat.transform.rotation.w);
                     }
 
             }
@@ -133,7 +135,7 @@ public class GymController : MonoBehaviour
             Quaternion.Lerp(player.transform.rotation, yogaAnimeRotation,Time.deltaTime *2));
         }
 
-        if(Input.anyKeyDown)
+        if(Input.anyKeyDown && !Input.GetMouseButtonDown(1))
         {
             treadMillIsActive = false;
             bicicleIsActive = false;
@@ -167,8 +169,9 @@ public class GymController : MonoBehaviour
     {
         
         panel.SetActive(false);
-        expPanel.GetComponentInChildren<Text>().text = exp.ToString() + "ÀÇ °æÇèÄ¡ È¹µæ!";
         expPanel.SetActive(true);
+        expText =  expPanel.GetComponentInChildren<Text>();
+        expText.text = exp.ToString() + "ÀÇ °æÇèÄ¡ È¹µæ!";
     }
    
 
@@ -182,7 +185,8 @@ public class GymController : MonoBehaviour
 
     public void bicicleAnimeStart()
     {
-        
+
+        player.GetComponent<MyPlayer>().playJumpAnime();
         player.GetComponent<MyPlayer>().Invoke("playBicicleAnime", 1.0f);
 
         bicicleIsActive = true;

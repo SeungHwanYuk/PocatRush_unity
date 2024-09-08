@@ -49,14 +49,15 @@ public class YogaController : MonoBehaviour
             print("운동을 하시고 오셔야죠");
             return;
         }
-        print("요가 으쌰!");
+        print("요가 으쌰! , " + "경험치 : " + exp);
 
         
         gymController.GetComponent<GymController>().yogaAnimeStart();
         gymController.GetComponent<GymController>().exp = exp;
+        gymController.GetComponent<GymController>().trainingEnd();
+        gameManager.GetComponent<DeviceController>().minUpdate(0);
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
-        gameManager.GetComponent<DeviceController>().minUpdate(0);
         print("경험치 획득 완료");
         onTrainingFinished.Invoke();
 #endif

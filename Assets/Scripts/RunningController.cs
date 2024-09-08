@@ -53,7 +53,7 @@ public class RunningController : MonoBehaviour
         }
 
         
-        print("·¯´× À¸›X!");
+        print("·¯´× À¸›X! , " + "°æÇèÄ¡ : " + exp);
         if (gymController.tag == "TreadMill")
         {
             gymController.GetComponent<GymController>().fastRunAnimeStart();
@@ -63,9 +63,10 @@ public class RunningController : MonoBehaviour
             gymController.GetComponent<GymController>().bicicleAnimeStart();
         }
         gymController.GetComponent<GymController>().exp = exp;
+        gymController.GetComponent<GymController>().trainingEnd();
+        gameManager.GetComponent<DeviceController>().kmUpdate(0);
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
-        gameManager.GetComponent<DeviceController>().kmUpdate(0);
         print("°æÇèÄ¡ È¹µæ ¿Ï·á");
         onTrainingFinished.Invoke();
 #endif

@@ -8,6 +8,7 @@ public class TimeController : MonoBehaviour
     public GameObject poleLights;
     public Material daySky;
     public Material nightSky;
+    public GameObject winky;
 
     
 
@@ -15,7 +16,8 @@ public class TimeController : MonoBehaviour
     void Start()
     {
         /*poleLights = GameObject.FindGameObjectWithTag("PoleLight");*/
-    }
+        winky.SetActive(false);
+}
 
     // Update is called once per frame
     void Update()
@@ -27,6 +29,7 @@ public class TimeController : MonoBehaviour
         if(mainLight.enabled == true)
         {
         mainLight.enabled = false;
+            winky.SetActive(true);
         poleLights.SetActive(true);
             RenderSettings.skybox = nightSky;
             RenderSettings.ambientLight = new Color32(109, 134, 213, 0);
@@ -36,6 +39,7 @@ public class TimeController : MonoBehaviour
         } else if (mainLight.enabled == false)
         {
             mainLight.enabled = true;
+            winky.SetActive(false);
             poleLights.SetActive(false);
             RenderSettings.skybox = daySky;
             RenderSettings.ambientLight = new Color32(255, 255, 255, 0);

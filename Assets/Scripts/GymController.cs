@@ -30,15 +30,22 @@ public class GymController : MonoBehaviour
     private GameObject treadmill;
     private GameObject bicicle;
     private GameObject yogaMat;
+    private GameObject benchPress;
+    private Vector3 benchPressAnimePoint;
     private Vector3 fastRunAnimePoint;
     private Vector3 bicicleAnimePoint;
     private Vector3 yogaAnimePoint;
     private Quaternion yogaAnimeRotation;
+    private Quaternion benchPressAnimeRotation;
+
+    // 상호작용시 애니메이션이 필요한 오브젝트
+    public GameObject benchPressBar;
 
     // 러프(부드럽게 목표까지 이동)을 위한 온/오프 boolean
     private bool yogaIsActive;
     private bool treadMillIsActive;
     private bool bicicleIsActive;
+    private bool benchPressIsActive;
 
     // 키 입력 boolean
     private bool playerInput;
@@ -107,7 +114,14 @@ public class GymController : MonoBehaviour
                     yogaMat = gameObject;
                     yogaAnimePoint =  new Vector3(yogaMat.transform.position.x +0.9f, yogaMat.transform.position.y + 0.5f, yogaMat.transform.position.z+0.5f);
                     yogaAnimeRotation = new Quaternion(yogaMat.transform.rotation.x, yogaMat.transform.rotation.y + -1, yogaMat.transform.rotation.z, yogaMat.transform.rotation.w);
-                    }
+                    } else if(gameObject.tag == "BenchPress")
+                {
+                    benchPress = gameObject;
+                    benchPressBar = benchPress.transform.Find("benchpressBar").gameObject;
+                    benchPressAnimePoint = new Vector3(benchPress.transform.position.x - 0.05f, 1f, benchPress.transform.position.z);
+                    benchPressAnimeRotation = new Quaternion(0, 0, 0, 0);
+                    print(benchPress.transform.rotation.y);
+                }
 
             }
         }
@@ -133,13 +147,25 @@ public class GymController : MonoBehaviour
         player.transform.SetPositionAndRotation(
             Vector3.Lerp(player.transform.position, yogaAnimePoint, Time.deltaTime) ,
             Quaternion.Lerp(player.transform.rotation, yogaAnimeRotation,Time.deltaTime *2));
+        } else if(benchPressIsActive == true)
+        {
+            // 위치
+            player.transform.SetLocalPositionAndRotation(
+                benchPressAnimePoint,
+                benchPressAnimeRotation);
         }
 
-        if(Input.anyKeyDown && !Input.GetMouseButtonDown(1))
+        if(Input.anyKeyDown && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(0))
         {
             treadMillIsActive = false;
             bicicleIsActive = false;
             yogaIsActive = false;
+            benchPressIsActive = false;
+
+            if (benchPressBar)
+            {
+                benchPressBar.SetActive(true);
+            }
         }
     }
 
@@ -181,6 +207,17 @@ public class GymController : MonoBehaviour
         player.GetComponent<MyPlayer>().playFastRunAnime();
 
         treadMillIsActive = true;
+    }
+
+    public void benchPressAnimeStart()
+    {
+        player.GetComponent<MyPlayer>().playJumpAnime();
+        player.GetComponent<MyPlayer>().Invoke("playBenchPressAnime", 1.0f);
+        if (benchPressBar)
+        {
+        benchPressBar.SetActive(false);
+        }
+        benchPressIsActive = true;
     }
 
     public void bicicleAnimeStart()

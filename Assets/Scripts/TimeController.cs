@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeController : MonoBehaviour
 {
@@ -10,24 +11,72 @@ public class TimeController : MonoBehaviour
     public Material nightSky;
     public GameObject winky;
 
+    // ¹Ù²ñ
+    public Sprite daySprite;
+    public Sprite nightSprite;
+    public Sprite daySunny;
+    public Sprite nightMooney;
+
+    // ²¯´Ù Å´
+    public GameObject dayClouds;
+    public GameObject nightClouds;
+
+    // ¿Å±è
     
+
+    public GameObject sunUiObject;
+    public GameObject moonUiObject;
+    
+    private Vector3 sunUiObjectPoint;
+    private Vector3 moonUiObjectPoint;
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         /*poleLights = GameObject.FindGameObjectWithTag("PoleLight");*/
         winky.SetActive(false);
-}
+        nightClouds.SetActive(false);
+        moonUiObject.SetActive(false);
+
+
+
+    }
 
     // Update is called once per frame
     void Update()
     {
         
+        
     }
+
+    private void FixedUpdate()
+    {
+       
+    }
+
+
+
     public void SetDayTime()
     {
         if(mainLight.enabled == true)
         {
+            // UI
+
+            gameObject.GetComponent<Image>().sprite = nightSprite;
+           /* sunUiObject.GetComponent<RawImage>().texture = nightMooney.texture;*/
+            nightClouds.SetActive(true);
+            dayClouds.SetActive(false);
+            sunUiObject.SetActive(false);
+            moonUiObject.SetActive(true);
+
+
+
+
+
         mainLight.enabled = false;
             winky.SetActive(true);
         poleLights.SetActive(true);
@@ -38,6 +87,14 @@ public class TimeController : MonoBehaviour
 
         } else if (mainLight.enabled == false)
         {
+            // UI
+            gameObject.GetComponent<Image>().sprite = daySprite;
+            /*sunUiObject.GetComponent<RawImage>().texture = daySunny.texture;*/
+            nightClouds.SetActive(false);
+            dayClouds.SetActive(true);
+            sunUiObject.SetActive(true);
+            moonUiObject.SetActive(false);
+
             mainLight.enabled = true;
             winky.SetActive(false);
             poleLights.SetActive(false);

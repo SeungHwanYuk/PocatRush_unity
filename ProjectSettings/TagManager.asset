@@ -14,6 +14,10 @@ TagManager:
   - TreadMill
   - Bicicle
   - YogaMat
+  - ItemPanel
+  - UserPanel
+  - AnimeObject
+  - BenchPress
   layers:
   - Default
   - TransparentFX

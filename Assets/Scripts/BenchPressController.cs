@@ -51,9 +51,12 @@ public class BenchPressController : MonoBehaviour
             return;
         }
         print("벤치 프레스 으쌰! , " + "경험치 : " + exp);
+       
+        gymController.GetComponent<GymController>().benchPressAnimeStart();
         gymController.GetComponent<GymController>().exp = exp;
         gymController.GetComponent<GymController>().trainingEnd();
         gameManager.GetComponent<DeviceController>().kgUpdate(0);
+       
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
         print("경험치 획득 완료");

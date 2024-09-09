@@ -25,7 +25,9 @@ mergeInto(LibraryManager.library, {
   },
    HpUpdateExtern: function (newHp) {
     window.dispatchReactUnityEvent("HpUpdate", newHp);
+  },
+  ItemValueUpdateExtern: function (nowChuruValue,nowCoinValue) {
+    window.dispatchReactUnityEvent("ItemValueUpdate" , nowChuruValue,nowCoinValue);
   }
-  
   // 쉼표 빼먹지 말것!
 });

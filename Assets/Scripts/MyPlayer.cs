@@ -20,6 +20,7 @@ public class MyPlayer : MonoBehaviour
     // 애니메이션 호출
     public GameObject player;
     public GameObject userPanel;  // 체력 확인용
+    public GameObject animeBenchPressBarObject;  // 애니메이션에 포함된 오브젝트
     Animator animator;
 
     private string standingAnimeCase1 = "PlayerStandingIdle";
@@ -33,6 +34,7 @@ public class MyPlayer : MonoBehaviour
     private string standUpAnime = "PlayerStandUp";
     private string fastRunAnime = "PlayerFastRun";
     private string bicicleAnime = "PlayerBicicle";
+    private string benchPressAnime = "PlayerBenchPress";
     private string yogaAnime1 = "PlayerYoga1";
     private string yogaAnime2 = "PlayerYoga2";
     private string drunkAnime = "PlayerDrunk";
@@ -52,6 +54,7 @@ public class MyPlayer : MonoBehaviour
     {
         cameraTransform = Camera.main.transform;
         animator = player.GetComponent<Animator>();
+        animeBenchPressBarObject.SetActive(false);
     }
 
 
@@ -147,6 +150,7 @@ public class MyPlayer : MonoBehaviour
             idleChangeTime = 0.0f;
             standingAnime = "PlayerStandingIdle";
             playerBusy = false;
+            animeBenchPressBarObject.SetActive(false);
         }
             if (nowAnime != oldAnime)
             {
@@ -201,6 +205,13 @@ public class MyPlayer : MonoBehaviour
         playerBusy = true;
         animator.Play(bicicleAnime);
        
+    }
+
+    public void playBenchPressAnime()
+    {
+        playerBusy = true;
+        animeBenchPressBarObject.SetActive(true);
+        animator.Play(benchPressAnime);
     }
 
     public void playJumpAnime()

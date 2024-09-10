@@ -122,8 +122,8 @@ public class MyPlayer : MonoBehaviour
                     nowAnime = drunkAnime;
                 } else
                 {
-
-                nowAnime = runAnime;
+                    moveSpeed = 4f;
+                    nowAnime = runAnime;
                 }
             }
         }

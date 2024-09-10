@@ -17,13 +17,16 @@ public class BenchPressController : MonoBehaviour
 
     public GameObject gameManager;
     public GameObject gymController;
+
+    public GameObject doTrainingPanel;
     public UnityEvent onTrainingFinished;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+       
+       
     }
 
     // Update is called once per frame
@@ -41,13 +44,19 @@ public class BenchPressController : MonoBehaviour
     {
         gymController = obj;
     }
+    public void doTrainingPanelClose()
+    {
+        doTrainingPanel.SetActive(false);
+    }
 
     public void startBenchPress()
     {
         // 운동량 0인 경우 UI추가 요망
         if(kg <= 0)
         {
-            print("운동을 하시고 오셔야죠");
+            
+            doTrainingPanel.SetActive(true);
+            Invoke("doTrainingPanelClose", 2.0f);
             return;
         }
         print("벤치 프레스 으쌰! , " + "경험치 : " + exp);
@@ -60,8 +69,8 @@ public class BenchPressController : MonoBehaviour
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
         print("경험치 획득 완료");
-        onTrainingFinished.Invoke();
 #endif
+        onTrainingFinished.Invoke();
     }
 
 

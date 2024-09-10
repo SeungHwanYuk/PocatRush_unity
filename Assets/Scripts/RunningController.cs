@@ -17,6 +17,7 @@ public class RunningController : MonoBehaviour
 
     public GameObject gameManager;
     public GameObject gymController;
+    public GameObject doTrainingPanel;
     public UnityEvent onTrainingFinished;
 
     
@@ -42,13 +43,19 @@ public class RunningController : MonoBehaviour
     {
         gymController = obj;
     }
+    public void doTrainingPanelClose()
+    {
+        doTrainingPanel.SetActive(false);
+    }
 
     public void startRunning()
     {
         // 운동량 0인 경우 UI추가 요망
         if (km <= 0)
         {
-            print("운동을 하시고 오셔야죠");
+           
+            doTrainingPanel.SetActive(true);
+            Invoke("doTrainingPanelClose", 2.0f);
             return;
         }
 
@@ -68,8 +75,8 @@ public class RunningController : MonoBehaviour
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
         print("경험치 획득 완료");
-        onTrainingFinished.Invoke();
 #endif
+        onTrainingFinished.Invoke();
     }
 
 

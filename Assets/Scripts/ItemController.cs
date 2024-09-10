@@ -19,11 +19,6 @@ public class ItemController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 서버에서 받아온다는 가정
-        ChuruText.text = 3.ToString();
-        CoinText.text = 3.ToString();
-
-
         userPanel = GameObject.FindGameObjectWithTag("UserPanel");
     }
 
@@ -31,9 +26,10 @@ public class ItemController : MonoBehaviour
     void Update()
     {
         userHp = int.Parse(userPanel.GetComponent<GameManager>().hpText.text);
-        ChuruCount = int.Parse(ChuruText.text);
-        CoinCount = int.Parse(CoinText.text);
-        
+
+        ChuruText.text = ChuruCount.ToString();
+        CoinText.text = CoinCount.ToString();
+
     }
 
     public void useChuru()
@@ -44,6 +40,27 @@ public class ItemController : MonoBehaviour
             return;
         }
         userPanel.GetComponent<GameManager>().hpText.text = (userHp + 1).ToString();
-        ChuruText.text = (ChuruCount - 1).ToString();
+        ChuruCount = ChuruCount - 1;
+    }
+
+    public void useCoin()
+    {
+        if (CoinCount <= 0)
+        {
+            print("코인 없음!");
+            return;
+        }
+        
+        CoinCount = CoinCount - 1;
+    }
+
+    public void GetChuruValueByCharacter(int churu)
+    {
+        ChuruCount = churu;      
+    }
+
+    public void GetCoinValueByCharacter(int coin)
+    {    
+        CoinCount = coin;
     }
 }

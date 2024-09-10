@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject itemPanel;
 
     public int nowHp;
+    public int newHp;
     public int nowChuruValue;
     public int nowCoinValue;
 
@@ -59,8 +60,8 @@ public class GameManager : MonoBehaviour
 
     public void HpUpdate()
     {
-        int newHp = nowHp - 1;
-        hpText.text = newHp.ToString();
+        newHp = nowHp;
+        hpText.text = (newHp-1).ToString();
 #if UNITY_WEBGL == true && UNITY_EDITOR == false 
         HpUpdateExtern(newHp);
         ItemValueUpdateExtern(nowChuruValue, nowCoinValue);

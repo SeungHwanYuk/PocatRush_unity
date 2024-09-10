@@ -18,6 +18,7 @@ TagManager:
   - UserPanel
   - AnimeObject
   - BenchPress
+  - DoTrainingPanel
   layers:
   - Default
   - TransparentFX

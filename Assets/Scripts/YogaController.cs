@@ -17,7 +17,9 @@ public class YogaController : MonoBehaviour
 
     public GameObject gameManager;
     public GameObject gymController;
+    public GameObject doTrainingPanel;
     public UnityEvent onTrainingFinished;
+
 
 
     // Start is called before the first frame update
@@ -40,13 +42,19 @@ public class YogaController : MonoBehaviour
     {
         gymController = obj;
     }
+    public void doTrainingPanelClose()
+    {
+        doTrainingPanel.SetActive(false);
+    }
 
     public void startYoga()
     {
         // 운동량 0인 경우 UI추가 요망
         if (min <= 0)
         {
-            print("운동을 하시고 오셔야죠");
+            
+            doTrainingPanel.SetActive(true);
+            Invoke("doTrainingPanelClose", 2.0f);
             return;
         }
         print("요가 으쌰! , " + "경험치 : " + exp);
@@ -59,8 +67,8 @@ public class YogaController : MonoBehaviour
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
         CharExpUpdateExtern(exp);
         print("경험치 획득 완료");
-        onTrainingFinished.Invoke();
 #endif
+        onTrainingFinished.Invoke();
     }
 
 

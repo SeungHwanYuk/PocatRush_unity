@@ -25,6 +25,7 @@ public class DeviceController : MonoBehaviour
     // 연동 필요 UI
     public GameObject devicePanel;
     public GameObject signPanel;
+    public Slider kmSlider;
 
     // 테스트 전용
     public int km;
@@ -99,5 +100,12 @@ public class DeviceController : MonoBehaviour
         inputMin = inputMin + 1;
     }
 
+
+    public void changeDataFromSlider()
+    {
+        int value = ((int)kmSlider.value);
+        inputKm = value;
+    }
+  
 
 }

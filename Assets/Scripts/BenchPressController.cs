@@ -60,8 +60,11 @@ public class BenchPressController : MonoBehaviour
             return;
         }
         print("벤치 프레스 으쌰! , " + "경험치 : " + exp);
-       
+
+        if (gymController.tag == "BenchPress")
+        {
         gymController.GetComponent<GymController>().benchPressAnimeStart();
+        }
         gymController.GetComponent<GymController>().exp = exp;
         gymController.GetComponent<GymController>().trainingEnd();
         gameManager.GetComponent<DeviceController>().kgUpdate(0);

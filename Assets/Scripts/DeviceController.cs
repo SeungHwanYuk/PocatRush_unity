@@ -56,8 +56,26 @@ public class DeviceController : MonoBehaviour
         minText.text = inputMin.ToString();
     }
 
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
+    public void setKmFromWatch(int km)
+    {
+        inputKm = km;
+        print("시계 업데이트" + km);
+    }
 
-    public void kmUpdate(int km)
+    public void setKgFromWatch(int kg)
+    {  
+        inputKg = kg;
+        print("시계 업데이트" + km);
+    }
+    public void setMinFromWatch(int min)
+    {
+        inputMin = min;
+        print("시계 업데이트" + km);
+    }
+#endif
+
+        public void kmUpdate(int km)
     {
         inputKm = km;
 #if UNITY_WEBGL == true && UNITY_EDITOR == false

@@ -62,7 +62,7 @@ public class TalkMainNPC : MonoBehaviour
         } else if(count == 8)
         {
             dialogue = "내가 졌다!!!\n츄르 줄테니까 저리가ㅠㅠㅠ";
-            itemPanel.GetComponent<ItemController>().ChuruCount = +1;
+            itemPanel.GetComponent<ItemController>().ChuruCount = itemPanel.GetComponent<ItemController>().ChuruCount + 1;
             churuGet.SetActive(true);
         } else if(count >= 9)
         {

@@ -31,6 +31,9 @@ mergeInto(LibraryManager.library, {
   },
    WinkyFoundExtern: function () {
     window.dispatchReactUnityEvent("WinkyFound");
+  },
+  WatchActiveExtern: function (isActive) {
+    window.dispatchReactUnityEvent("WatchActive", isActive);
   }
   // 쉼표 빼먹지 말것!
 });

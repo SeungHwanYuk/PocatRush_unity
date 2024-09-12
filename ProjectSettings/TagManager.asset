@@ -19,6 +19,7 @@ TagManager:
   - AnimeObject
   - BenchPress
   - DoTrainingPanel
+  - Roof
   layers:
   - Default
   - TransparentFX

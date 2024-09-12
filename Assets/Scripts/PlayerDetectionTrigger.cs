@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDetectionTrigger : MonoBehaviour
 {
     // 플레이어 범위 감지 전용 코드
+    
 
     // 접촉을 유지한다면 실행 또한 유지 Stay
     private void OnTriggerStay(Collider other)

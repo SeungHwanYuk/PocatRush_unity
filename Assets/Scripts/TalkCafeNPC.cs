@@ -10,8 +10,9 @@ public class TalkCafeNPC : MonoBehaviour
     public GameObject talkPanel;
     public GameObject nextButton;
     public GameObject goMainButton;
-    public GameObject askButton;
+    /*public GameObject askButton;*/
     public GameObject exitButton;
+    public GameObject shopButton;
 
     int clickCount = 0;
     int talkWayCount = 0;
@@ -33,7 +34,6 @@ public class TalkCafeNPC : MonoBehaviour
     public string hiAnime = "NPCHi";
   
 
-
     public void StartDialog()
     {
         animator = npc.GetComponent<Animator>();
@@ -45,7 +45,7 @@ public class TalkCafeNPC : MonoBehaviour
         StartCoroutine(Typing(dialogue));
 
         animator.Play(hiAnime);
-        askButton.SetActive(false);
+        shopButton.SetActive(false);
 
     }
 
@@ -78,11 +78,12 @@ public class TalkCafeNPC : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         nextButton.SetActive(true);
 
-        // 대화 분기점
-        /*if(clickCount == 2 && talkWayCount == 0)
+        /*// 대화 분기점
+        if (clickCount == 2 && talkWayCount == 0)
         {
-        askButton.SetActive(true);
-            
+            askButton.SetActive(true);
+            exitButton.SetActive(true);
+
         }*/
 
     }
@@ -105,6 +106,7 @@ public class TalkCafeNPC : MonoBehaviour
         {
             nextButton.SetActive(false);
             exitButton.SetActive(true);
+            shopButton.SetActive(true);
         }
 
        /* // 분기점 1
@@ -112,7 +114,8 @@ public class TalkCafeNPC : MonoBehaviour
         {
             exitButton.SetActive(false);
             dialogue = "인간세계에서 운동을하면\n포켓월드의 경험치가 올라간다던데...?";
-        } else if(clickCount == 3 && talkWayCount == 1)
+        }
+        else if (clickCount == 3 && talkWayCount == 1)
         {
             dialogue = "헬스장안에있는 운동기구와 상호작용하면\n너의 레벨이 오를거야!";
         }
@@ -128,18 +131,16 @@ public class TalkCafeNPC : MonoBehaviour
 
     }
 
-    public void askCountPlus()
+   /* public void askCountPlus()
     {
         // 분기점 시작시 첫 문장 지정
-        
-        
         dialogue = "그건 스마트워치잖아?";
         nextButton.SetActive(false);
         talkWayCount++;
         print(talkWayCount+ " : talkWayCount");
         dialogText.text = "";
         StartCoroutine(Typing(dialogue));
-    }
+    }*/
     public void countPlus()
     {
         nextButton.SetActive(false);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 475177532728329264}
   - component: {fileID: 7969590764825649279}
   - component: {fileID: 206286546964252927}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: benchpressBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1791874792251181401}
   - component: {fileID: 4457109041895521872}
   - component: {fileID: 4457535136184383911}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: benchpressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,9 +182,10 @@ GameObject:
   - component: {fileID: 1196093966294546038}
   - component: {fileID: 1196093966294546039}
   - component: {fileID: 1196093966294546037}
-  m_Layer: 0
+  - component: {fileID: 4124736001210114003}
+  m_Layer: 8
   m_Name: benchPress
-  m_TagString: Untagged
+  m_TagString: BenchPress
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,3 +269,16 @@ MonoBehaviour:
   exp: 0
   playerHp: {fileID: 0}
   benchPressBar: {fileID: 0}
+--- !u!114 &4124736001210114003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416625853706484737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee32bdc09ed87a47b0f2d504527331d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fButton: {fileID: 0}

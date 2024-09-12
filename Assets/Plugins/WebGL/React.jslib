@@ -28,6 +28,9 @@ mergeInto(LibraryManager.library, {
   },
   ItemValueUpdateExtern: function (nowChuruValue,nowCoinValue) {
     window.dispatchReactUnityEvent("ItemValueUpdate" , nowChuruValue,nowCoinValue);
+  },
+   WinkyFoundExtern: function () {
+    window.dispatchReactUnityEvent("WinkyFound");
   }
   // 쉼표 빼먹지 말것!
 });

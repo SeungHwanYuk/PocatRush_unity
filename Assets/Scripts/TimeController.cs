@@ -78,7 +78,11 @@ public class TimeController : MonoBehaviour
 
 
         mainLight.enabled = false;
+            if (winky)
+            {
             winky.SetActive(true);
+
+            }
         poleLights.SetActive(true);
             RenderSettings.skybox = nightSky;
             RenderSettings.ambientLight = new Color32(109, 134, 213, 0);
@@ -96,7 +100,10 @@ public class TimeController : MonoBehaviour
             moonUiObject.SetActive(false);
 
             mainLight.enabled = true;
-            winky.SetActive(false);
+            if (winky)
+            {
+                winky.SetActive(false);
+            }
             poleLights.SetActive(false);
             RenderSettings.skybox = daySky;
             RenderSettings.ambientLight = new Color32(255, 255, 255, 0);

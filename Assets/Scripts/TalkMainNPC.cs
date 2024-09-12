@@ -10,6 +10,9 @@ public class TalkMainNPC : MonoBehaviour
     // text 정의
     public Text dialogText;
     public string dialogue;
+    public int count = 0;
+    public GameObject itemPanel;
+    public GameObject churuGet;
 
     // Event 종료시 외부 함수 호출
     public UnityEvent onDialogFinished;
@@ -29,8 +32,44 @@ public class TalkMainNPC : MonoBehaviour
     {
         animator = npc.GetComponent<Animator>();
         dialogText.text = "";
-        dialogue = "내가 만만해? \n\n룰루라라\n\n\n 뭘봐?";
-        
+        if(count == 0)
+        {
+
+        dialogue = "룰루랄라~";
+        } else if( count == 1)
+        {
+            dialogue = "츄르먹고 싶당~";
+        } else if(count == 2)
+        {
+            dialogue = "너도 츄르 먹을래?";
+        } else if(count == 3)
+        {
+            dialogue = "왼쪽 상단의 츄르 아이콘을 누르면\n체력이 회복된다구!";
+        }
+        else if(count == 4)
+        {
+            dialogue = "이제 운동 열심히 하구\n게임 하러 가는건 어때??";
+        }
+        else if(count == 5)
+        {
+            dialogue = "배고프니까\n말 걸지 말아줄래?";
+        } else if(count == 6)
+        {
+            dialogue = "말시키지 말라니까???";
+        } else if(count == 7)
+        {
+            dialogue = "그만해 !!!";
+        } else if(count == 8)
+        {
+            dialogue = "내가 졌다!!!\n츄르 줄테니까 저리가ㅠㅠㅠ";
+            itemPanel.GetComponent<ItemController>().ChuruCount = +1;
+            churuGet.SetActive(true);
+        } else if(count >= 9)
+        {
+            dialogue = "ㅠㅠㅠㅠㅠ";
+        }
+       
+
         // 코루틴 : 원하는 시간만큼 딜레이 적용 가능
         // yield 와 함께 사용됨
         StartCoroutine(Typing(dialogue));
@@ -64,6 +103,6 @@ public class TalkMainNPC : MonoBehaviour
         // TODO 
         yield return new WaitForSeconds(1f);
         FinishDialog();
-
+        count++;
     }
 }
